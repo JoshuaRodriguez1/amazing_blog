@@ -60,6 +60,7 @@ group :development, :test do
   gem "rubocop-rake", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-thread_safety", require: false
+  gem "slim_lint"
 end
 
 group :development do
