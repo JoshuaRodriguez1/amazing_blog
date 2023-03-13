@@ -7,9 +7,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "Registered"
-      redirect_to root_path
+      redirect_to login_path
     else
-      render :new
+      flash.now[:notice] = "Something went wrong"
+      render :new, status: :unprocessable_entity
     end
   end
 

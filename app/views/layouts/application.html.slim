@@ -10,4 +10,9 @@ htm
     = javascript_importmap_tags
 
   <body>
+    .flash-container
+      - flash.each do |type, msg|
+        .flash-item
+          span[class="flash-#{type}"]
+            = msg
     = yield
