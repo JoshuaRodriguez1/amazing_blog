@@ -1,0 +1,11 @@
+= form_with model: @user , url: login_path do |f|
+  div
+    = f.label :username
+  div
+    = f.text_field :username
+  div
+    = f.label :password
+  div
+    = f.text_field :password, type: :password
+  div
+    = f.submit "login"
