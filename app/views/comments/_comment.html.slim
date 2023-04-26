@@ -1,0 +1,25 @@
+- # TODO: this is a temporary fix, the bug ahs not been found yet
+- if comment.persisted?
+  div class="p-3 text-base bg-white rounded-lg dark:bg-gray-900"
+    footer class="flex justify-between items-center mb-2"
+      div class="flex items-center"
+        p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"
+            img class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="#{comment.user.email}"
+                = comment.user.email
+        p class="text-sm text-gray-600 dark:text-gray-400" datetime="2022-02-08" title="February 8th, 2022"
+            = comment.created_at
+
+      div
+        ul class="flex py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton"
+          - if user_signed_in?
+            - if allowed_to?(:update?, comment)
+              li
+                =  render "comments/edit_comment_modal", comment: comment
+            - if allowed_to?(:destroy?, comment)
+              li
+                = link_to "delete", article_comment_path(comment.article, comment), data: { turbo_method: :delete, turbo_confirm: "are you sure?" } , class: "block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+
+
+    p class="text-gray-500 dark:text-gray-400 px-3"
+      = comment.content  
+  hr

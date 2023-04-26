@@ -1,0 +1,5 @@
+h1 
+  | wellcome user
+  = current_user.username
+.flex.flex-col.gap-3[class="py-[50px]"]
+  = render partial: "articles/article", collection: current_user.articles, cached: true 

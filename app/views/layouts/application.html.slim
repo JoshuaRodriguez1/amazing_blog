@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title PetProject
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+  body.bg-gradient-to-t.from-cyan-500.to-blue-500
+    = render "layouts/navbar"
+    = render "layouts/flash"
+
+  = yield

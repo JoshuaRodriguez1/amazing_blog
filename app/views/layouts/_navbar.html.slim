@@ -1,0 +1,19 @@
+nav.bg-white.flex.flex-col.justify-between.items-center.rounded-b-lg[class="py-[20px] px-[50px] gap-[10px] sm:flex-row"]
+  h1 Amazing Blog
+  ul.flex[class="gap-[20px]"]
+    li
+      = link_to "home", root_path, class: nav_li_class 
+    li
+      = link_to "Contact us", contact_path, class: nav_li_class
+    li
+      = link_to "articles", articles_path, class: nav_li_class 
+    - if current_user.present?
+      li
+        = link_to "dashboard", dashboard_path, class: nav_li_class 
+      li
+        = link_to "sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: nav_li_class 
+    - else 
+      li
+        = link_to "login", new_user_session_path, class: nav_li_class 
+      li
+        = link_to "register", new_user_registration_path, class: nav_li_class

@@ -1,0 +1,23 @@
+Rails.application.routes.draw do
+  devise_for :users, path: 'user', path_names: { sign_in: 'login' }, controllers: {
+    # omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'user/sessions',
+    registrations: 'user/registrations',
+    passwords: 'user/passwords'
+  }
+
+  get "/dashboard", to: "accounts#dashboard"
+  
+  get "/account", to: "accounts#index"
+  get "/account/:username", to: "accounts#show"
+
+  root "home#index"
+  get "contact", to: "home#contact"
+  post "contact", to: "home#create"
+
+  resources :articles, expect: %i[new] do
+    post "/publish", to: "articles#publish"
+    post "/unpublish", to: "articles#unpublish"
+    resources :comments, only: %i[create edit update destroy]
+  end
+end

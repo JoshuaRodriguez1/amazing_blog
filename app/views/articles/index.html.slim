@@ -1,0 +1,4 @@
+- if user_signed_in?
+  = render "form", article: @article
+.flex.flex-col.gap-3[class="py-[50px]"]
+  = render partial: "articles/article", collection: @articles, cached: true

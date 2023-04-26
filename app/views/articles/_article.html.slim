@@ -1,0 +1,30 @@
+div
+  .bg-white.flex.flex-col.rounded[class="gap-[20px] py-[20px] px-[30px] max-w-[90%] m-auto sm:max-w-[50%]"]
+    div.text-end
+      div[class="#{article.published? ? tag_class_green : tag_class_yellow}"]
+        = article.state
+    h1.text-3xl.text-center
+      = article.title
+    h4
+      = article.user.username
+    .article-text
+      = article.content
+    
+    .actions.flex.gap-1
+      - if allowed_to?(:edit?, article)
+        = link_to "edit", edit_article_path(article) , class: btn_class_blue
+      - if allowed_to?(:destroy?, article)
+        = link_to "delete", article , data: { turbo_method: :delete }, class: btn_class_red
+    - if allowed_to?(:publish?, article)
+      div
+        = link_to "Publish this article", article_publish_path(article), data: { turbo_method: :post }, class: "focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+    - if allowed_to?(:unpublish?, article)
+      div
+        = link_to "unpublish this article", article_unpublish_path(article), data: { turbo_method: :post }, class: "focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+    div
+      = form_with model: [article, article.comments.build], class: "flex gap-[5px] items-center justify-center" do |f|
+        = f.text_field :content, class: "rounded-lg  py-1 border-x-none border-t-none border-b-2 border-indigo-300 w-full", placeholder: "Comment" do
+        button[type="submit"]
+          = inline_svg("send", width: 35, height: 35)
+    div
+      = render partial: "comments/comment", collection: article.comments, cached: true
