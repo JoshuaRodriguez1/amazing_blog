@@ -196,6 +196,8 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    rating (1.0.0)
+      activerecord
     redis (4.8.1)
     regexp_parser (2.7.0)
     reline (0.3.2)
@@ -328,6 +330,7 @@ DEPENDENCIES
   jbuilder
   puma (~> 5.0)
   rails (~> 7.0.4)
+  rating
   redis (~> 4.0)
   rspec-rails
   rubocop
