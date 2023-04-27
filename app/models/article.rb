@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
   extend Enumerize
-
+  rating
+  
   STATES = %i[draft published].freeze
 
   enumerize :state, in: STATES, scope: :shallow, predicates: true
