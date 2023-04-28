@@ -8,6 +8,11 @@
     div
       = f.rich_text_area :content
     .flex.gap-3
-      = f.select :state, [:draft, [:publish, :published]], selected: :published
       div[class="#{btn_class_blue}"]
         = f.submit
+      div.flex.gap-2.items-center
+        = f.label "publish:"
+        = f.radio_button :state, "published"
+      div.flex.gap-2.items-center
+        = f.label "draft:"
+        = f.radio_button :state, "draft"

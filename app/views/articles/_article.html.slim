@@ -9,7 +9,21 @@ div
       = article.user.username
     .article-text
       = article.content
-    
+    div.flex.gap-1
+      - article.rating.average.to_i.times do
+        = inline_svg("star", width: 30, height: 30)
+    div
+      = form_with scope: :article, url: article_rate_path(article) do |f|
+        div
+          = f.check_box :amount, value: 1
+          = f.check_box :amount, value: 2
+          = f.check_box :amount, value: 3
+          = f.check_box :amount, value: 4
+          = f.check_box :amount, value: 5
+
+        div
+          = f.submit "rate"
+
     .actions.flex.gap-1
       - if allowed_to?(:edit?, article)
         = link_to "edit", edit_article_path(article) , class: btn_class_blue

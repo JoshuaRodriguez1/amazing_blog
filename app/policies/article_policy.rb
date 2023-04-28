@@ -33,6 +33,10 @@ class ArticlePolicy < ApplicationPolicy
     user.present? && owner?
   end
 
+  def rate?
+    user.present?
+  end
+
   private
 
   def owner?

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :articles, expect: %i[new] do
     post "/publish", to: "articles#publish"
     post "/unpublish", to: "articles#unpublish"
+    post "/rate", to: "articles#rate"
     resources :comments, only: %i[create edit update destroy]
   end
 end

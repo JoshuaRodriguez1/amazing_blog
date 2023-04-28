@@ -1,7 +1,9 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy]
   before_action :set_articles, only: %i[index create update]
-  before_action ->{ authorize! Article }, only: %i[index show]
+  before_action :set_article_prefix, only: %i[publish unpublish rate]
+  before_action -> { authorize! Article }, only: %i[index show rate]
+  before_action -> { @rate_form = RateForm.new }, only: %i[rate]
 
   def index
     @article = Article.new
@@ -52,7 +54,6 @@ class ArticlesController < ApplicationController
   end
 
   def publish
-    @article = Article.find(params[:article_id])
     authorize! @article
 
     if @article.update(state: "published")
@@ -65,7 +66,6 @@ class ArticlesController < ApplicationController
   end
 
   def unpublish
-    @article = Article.find(params[:article_id])
     authorize! @article
 
     if @article.update(state: "draft")
@@ -75,6 +75,23 @@ class ArticlesController < ApplicationController
     end
 
     redirect_to dashboard_path
+  end
+
+  def rate
+    authorize! @article
+    @rate_form.assign_attributes(article_rate_params)
+
+    if @rate_form.valid?
+      if rate_article.success?
+        flash[:notice] = "Article rated"
+      else
+        flash[:alert] = rate_article.error    
+      end
+    else
+      flash[:alert] = @rate_form.errors.full_messages.first 
+    end
+
+    redirect_to articles_path
   end
 
   private
@@ -87,8 +104,20 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  def set_article_prefix
+    @article = Article.find(params[:article_id])
+  end
+
   def article_params
     params.require(:article).permit(:title, :content, :state)
+  end
+
+  def article_rate_params
+    params.require(:article).permit(:amount)
+  end
+
+  def rate_article
+    @rate_article ||= Articles::Rate.call(user: current_user, article: @article, amount: @rate_form.amount)
   end
 
   def create_article
