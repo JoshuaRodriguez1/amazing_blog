@@ -121,7 +121,7 @@ class ArticlesController < ApplicationController
   end
 
   def create_article
-    @create_article ||= Articles::Create.call(article_params: article_params, user: current_user)
+    @create_article ||= Articles::Create.call(article_params: article_params, user: current_user, tags: params[:article][:tags])
   end
 
   def update_article
