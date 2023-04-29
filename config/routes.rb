@@ -15,10 +15,17 @@ Rails.application.routes.draw do
   get "contact", to: "home#contact"
   post "contact", to: "home#create"
 
+  
   resources :articles, expect: %i[new] do
     post "/publish", to: "articles#publish"
     post "/unpublish", to: "articles#unpublish"
     post "/rate", to: "articles#rate"
     resources :comments, only: %i[create edit update destroy]
+  end
+
+  namespace "api", defaults: { format: "jsonapi" } do
+    namespace "v1" do
+      resources :articles
+    end
   end
 end
