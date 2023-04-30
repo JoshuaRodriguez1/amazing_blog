@@ -13,6 +13,7 @@ gem "pg", "1.4.4"
 
 gem "active_model_serializers"
 
+gem "jwt"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 

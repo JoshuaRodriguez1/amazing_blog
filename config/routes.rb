@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   namespace "api", defaults: { format: "jsonapi" } do
     namespace "v1" do
       resources :articles
+      post "login", to: "sessions#create"
+      devise_for :user, path: 'user', only: :registrations, controllers: {
+        registrations: "api/v1/registrations"
+      }
     end
   end
 end
