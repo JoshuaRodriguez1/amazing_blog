@@ -1,0 +1,4 @@
+= form_with scope: :article, url: article_rate_path(article) do |f|
+  div.flex.gap-2
+    = f.range_field :amount, min: 1, max: 5, value: 5, class: "article-range"
+    = f.submit "rate", class: btn_class_blue

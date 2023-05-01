@@ -4,6 +4,6 @@ class ContactMailer < ApplicationMailer
     @user_email = data[:email]
     @content = data[:content]
 
-    mail(to: @user_email)
+    mail(to: @admin)
   end
 end

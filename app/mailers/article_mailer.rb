@@ -1,22 +1,22 @@
 class ArticleMailer < ApplicationMailer
   def article_created(article)
-    @user = article.user
+    @email = article.user.email
     @title = article.title
 
-    mail(to: @user.email)
+    mail(to: @email)
   end
 
   def article_deleted(article)
-    @user = article.user
+    @email = article.user.email
     @title = article.title
 
-    mail(to: @user.email)
+    mail(to: @email)
   end
 
   def article_updated(article)
-    @user = article.user
+    @email = article.user.email
     @title = article.title
 
-    mail(to: @user.email)
+    mail(to: @email)
   end
 end

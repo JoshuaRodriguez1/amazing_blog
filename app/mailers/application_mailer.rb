@@ -6,7 +6,7 @@ class ApplicationMailer < ActionMailer::Base
   protected
 
   def admin
-    # TODO: make admin
-    #@admin ||= User.find_by
+    # TODO: update the admin should have a rol
+    @admin ||= User.first
   end
 end
