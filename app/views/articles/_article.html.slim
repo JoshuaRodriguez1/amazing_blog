@@ -9,12 +9,13 @@ div
       = article.user.username
     .article-text
       = article.content
-    / div.flex.gap-1
-    /   - article.rating.average.to_i.times do
-    /     = inline_svg("star", width: 30, height: 30)
-    div
+    div.flex.gap-1
+      - article.rating.average.to_i.times do
+        = inline_svg("star", width: 30, height: 30)
+    div class="flex gap-2 flex-wrap"
       - article.tags.each do |tag|
-        = tag.name
+        span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-2 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400"
+          = tag.name
 
     div
       = form_with scope: :article, url: article_rate_path(article) do |f|

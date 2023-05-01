@@ -15,6 +15,8 @@
         = f.label "draft:"
         = f.radio_button :state, "draft"
       div.flex-gap-2.items-center
-        = f.collection_check_boxes :tags, Tag.all, :id, :name
+        = f.collection_check_boxes :tags, Tag.all, :id, :name do |b|
+          = b.check_box
+          = b.label
       div[class="#{btn_class_blue}"]
         = f.submit
