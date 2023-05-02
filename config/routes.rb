@@ -23,9 +23,13 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create edit update destroy]
   end
 
+  resources :tags, only: %i[show]
+
   namespace "api", defaults: { format: "jsonapi" } do
     namespace "v1" do
-      resources :articles
+      resources :articles do
+        resources :comments, only: %i[create update destroy]
+      end
       post "login", to: "sessions#create"
       devise_for :user, path: 'user', only: :registrations, controllers: {
         registrations: "api/v1/registrations"

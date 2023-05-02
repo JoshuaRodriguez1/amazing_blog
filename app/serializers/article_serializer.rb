@@ -3,4 +3,5 @@ class ArticleSerializer < ApplicationSerializer
 
   has_many :comments
   has_one :rating
+  has_many :tags
 end

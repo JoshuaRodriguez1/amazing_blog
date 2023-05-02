@@ -9,6 +9,8 @@ module Api
         @articles = Article.all
 
         @articles = @tag.articles if @tag
+        @articles = Article.find_by(title: params[:title]) if params[:title]
+
         render json: @articles
       end
 

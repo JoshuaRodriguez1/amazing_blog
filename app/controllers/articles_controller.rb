@@ -82,6 +82,9 @@ class ArticlesController < ApplicationController
     @rate_form.assign_attributes(article_rate_params)
 
     if @rate_form.valid?
+      # TODO: temporary solution
+      Rails.cache.clear
+
       if rate_article.success?
         flash[:notice] = "Article rated"
       else
