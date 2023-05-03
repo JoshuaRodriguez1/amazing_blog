@@ -4,6 +4,7 @@ module Api
       before_action :set_article, only: %i[show update destroy]
       before_action :set_tag, if: ->{ tag_name_param.present? }
       before_action :authenticate_user!, only: %i[create update destroy]
+      before_action -> { authorize! Article }, only: %i[index show]
 
       def index
         @articles = Article.all
@@ -16,6 +17,7 @@ module Api
 
       def create
         @article = create_article.article
+        authorize! @article
 
         if create_article.success?
           render json: { article: @article, msg: "article created successfully" }
@@ -25,6 +27,8 @@ module Api
       end
 
       def update        
+        authorize! @article
+
         if @article.update(article_params)
           render json: { article: @article, msg: "article updated" }
         else
@@ -33,6 +37,8 @@ module Api
       end
 
       def destroy
+        authorize! @article
+
         if @article.destroy
           render json: { article: @article, msg: "article destroyed" }
         else

@@ -20,6 +20,7 @@ module Users
       }
     end
     
+    # TODO: change the value and put this in ENV
     def jwt_secret
       "fhaohf(HGA*Fh0)"
     end

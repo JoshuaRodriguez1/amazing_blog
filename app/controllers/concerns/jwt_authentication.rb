@@ -28,6 +28,7 @@ module JwtAuthentication
     JWT.decode(access_token, jwt_secret, true, { algorithm: "HS256"}).first
   end
 
+  # TODO: change the value and put this in ENV
   def jwt_secret
     "fhaohf(HGA*Fh0)"
   end

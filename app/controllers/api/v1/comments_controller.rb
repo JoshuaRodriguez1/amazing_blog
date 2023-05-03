@@ -5,15 +5,21 @@ module Api
       before_action :set_article
       before_action :set_comment, only: %i[update destroy]
 
-      def create    
+      def create
+        @comment = create_comment.comment
+
+        authorize! @comment
+        
         if create_comment.success?
           render json: { msg: "comment created"}
         else
           render json: { msg: "comment not created", error: @comment.error.full_messages }
         end
       end
-    
+
       def update
+        authorize! @comment
+
         if update_comment.success?
           render json: { msg: "comment updated" }
         else
@@ -22,6 +28,8 @@ module Api
       end
     
       def destroy
+        authorize! @comment
+
         if destroy_comment.success?
           render json: { msg: "comment destroyed" }
         else
