@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+tag_names = ["Technology", "Business", "Politics", "Entertainment", "Sports", "Science", "Health", "Education", "Environment", "Food", "Travel"]
+
+
+tag_names.each do |name|
+  FactoryBot.create(:tag, name: name)
+end

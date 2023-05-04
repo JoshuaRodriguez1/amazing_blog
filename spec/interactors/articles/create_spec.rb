@@ -4,7 +4,7 @@ describe Articles::Create do
   describe ".organized" do
     let(:expected_order) do
       [
-        Articles::Create::Execute
+        Articles::Create::Execute, Articles::Create::CreateArticleTags
       ]
     end
 
